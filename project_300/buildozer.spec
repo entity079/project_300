@@ -1,0 +1,19 @@
+[app]
+title = Project 300
+package.name = project300
+package.domain = org.yourname
+source.dir = .
+source.include_exts = py,png,jpg,kv,atlas
+version = 0.1
+requirements = kivy
+orientation = portrait
+osx.python_version = 3
+osx.kivy_version = 2.2.1
+fullscreen = 0
+android.permissions = INTERNET
+android.api = 33
+android.minapi = 21
+android.sdk = 33
+android.ndk = 25b
+android.arch = arm64-v8a
+p4a.branch = master 
