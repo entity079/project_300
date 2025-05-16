@@ -18,7 +18,12 @@ jobs:
         run: |
           cd project_300
           buildozer init
-          buildozer -v android debug
+          buildozer -v android debug 2>&1 | tee build.log
+          if [ ! -f "bin/*.apk" ]; then
+            echo "Build failed - no APK generated"
+            cat build.log
+            exit 1
+          fi
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
