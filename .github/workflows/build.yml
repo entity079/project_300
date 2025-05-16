@@ -14,14 +14,23 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3-pip git zip unzip openjdk-17-jdk
           pip install buildozer
+      - name: Debug directory structure
+        run: |
+          echo "Current directory structure:"
+          ls -la
+          echo "Checking project_300 directory:"
+          ls -la project_300 || echo "project_300 directory not found"
       - name: Build APK
         run: |
-          cd project_300
+          cd project_300 || exit 1
+          echo "Running buildozer init..."
           buildozer init
+          echo "Running buildozer android debug..."
           buildozer -v android debug 2>&1 | tee build.log
+          echo "Build log contents:"
+          cat build.log
           if [ ! -f "bin/*.apk" ]; then
             echo "Build failed - no APK generated"
-            cat build.log
             exit 1
           fi
       - name: Upload APK
